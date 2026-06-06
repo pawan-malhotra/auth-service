@@ -1,0 +1,3 @@
+2026-05-30 20:06:43.621481+05:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]desc USERS"; expected "DELETE, DROP"; SQL statement:
+desc USERS [42001-240]
