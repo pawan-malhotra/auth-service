@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("v1/users")
+@RequestMapping("v1")
 public interface UserControllerInterface {
 
-    @PostMapping("/")
+    @PostMapping("/users")
     ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO);
 }
