@@ -23,4 +23,16 @@ public class RESTExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
+
+    @ExceptionHandler(RoleServiceException.class)
+    public ResponseEntity<ErrorResponse> handleException(RoleServiceException ex, HttpServletRequest request) {
+        ErrorResponse response = ErrorResponse.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .localDateTime(LocalDateTime.now())
+                .message(ex.getMessage())
+                .path(request.getRequestURI())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
 }
