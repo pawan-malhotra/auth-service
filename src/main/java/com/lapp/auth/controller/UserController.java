@@ -1,5 +1,6 @@
 package com.lapp.auth.controller;
 
+import com.lapp.auth.model.CreateUserRequest;
 import com.lapp.auth.model.UserDTO;
 import com.lapp.auth.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class UserController implements UserControllerInterface {
     }
 
     @Override
-    public ResponseEntity<UserDTO> saveUser(UserDTO userDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.saveUser(userDTO));
+    public ResponseEntity<UserDTO> saveUser(CreateUserRequest createUserRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.saveUser(createUserRequest));
     }
 }

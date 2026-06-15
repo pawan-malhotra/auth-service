@@ -1,6 +1,7 @@
 package com.lapp.auth.service;
 
 import com.lapp.auth.exceptions.UserServiceException;
+import com.lapp.auth.model.CreateUserRequest;
 import com.lapp.auth.model.Role;
 import com.lapp.auth.model.RoleDTO;
 import com.lapp.auth.model.User;
@@ -23,24 +24,24 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO saveUser(UserDTO userDTO) {
+    public UserDTO saveUser(CreateUserRequest createUserRequest) {
         try {
-            if (userDTO == null) {
+            if (createUserRequest == null) {
                 throw new UserServiceException("User Data Not Found");
             }
 
-            validateUserName(userDTO.getUsername());
-            validateEmail(userDTO.getEmail());
-            validatePassword(userDTO.getPassword());
+            validateUserName(createUserRequest.getUsername());
+            validateEmail(createUserRequest.getEmail());
+            validatePassword(createUserRequest.getPassword());
 
             User user = new User();
-            user.setUsername(userDTO.getUsername());
-            user.setEmail(userDTO.getEmail());
-            user.setPassword(userDTO.getPassword());
+            user.setUsername(createUserRequest.getUsername());
+            user.setEmail(createUserRequest.getEmail());
+            user.setPassword(createUserRequest.getPassword());
             user.setAccountNonLocked(true);
             user.setEnabled(true);
             Set<Role> roleSet = new HashSet<>();
-            userDTO.getRoles().forEach(role -> roleSet.add(new Role(role.getId(), role.getRoleName())));
+            createUserRequest.getRoles().forEach(role -> roleSet.add(new Role(role.getId(), role.getRoleName())));
             user.setRoles(roleSet);
 
             User savUser = userRepository.save(user);
